@@ -1,5 +1,6 @@
 const prisma = require('../../core/db');
 const io = require('../../core/socket');
+const { uploadToBlob } = require('../../middlewares/uploadMiddleware');
 
 const createReport = async (req, res, next) => {
   try {
@@ -13,7 +14,12 @@ const createReport = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Photo is required' });
     }
 
-    const photoUrl = `/uploads/${req.file.filename}`;
+    // Upload ke Azure Blob Storage → dapat URL publik permanen
+    const photoUrl = await uploadToBlob(
+      req.file.buffer,
+      req.file.originalname,
+      req.file.mimetype
+    );
 
     const report = await prisma.report.create({
       data: {
@@ -28,7 +34,7 @@ const createReport = async (req, res, next) => {
       }
     });
 
-    // Emmit socket event to notify admins in real-time
+    // Emit socket event to notify admins in real-time
     io.getIo().emit('new-report', report);
 
     res.status(201).json({ success: true, message: 'Report submitted successfully', report });
