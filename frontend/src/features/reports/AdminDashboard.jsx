@@ -6,6 +6,8 @@ import { LogOut, Filter, Activity, Image as ImageIcon, CheckCircle, Clock, Phone
 import { io } from 'socket.io-client';
 import { format } from 'date-fns';
 
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL ?? 'http://localhost:5000';
+
 const AdminDashboard = () => {
   const { user, logoutAuth } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -22,7 +24,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchReports();
 
-    const socket = io('http://localhost:5000');
+    const socket = io(SOCKET_URL);
     socket.on('connect', () => setSocketStatus('connected'));
     socket.on('disconnect', () => setSocketStatus('disconnected'));
     socket.on('online-count', (count) => setOnlineCount(count));
@@ -234,7 +236,7 @@ const AdminDashboard = () => {
                     <p className="font-bold text-slate-800 dark:text-white text-base mb-1 truncate">{r.title}</p>
                     <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-3">{r.description}</p>
                     <a
-                      href={`http://localhost:5000${r.photoUrl}`}
+                      href={`${SOCKET_URL}${r.photoUrl}`}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 px-3 py-1.5 rounded transition-colors text-slate-700 dark:text-slate-300 font-medium"

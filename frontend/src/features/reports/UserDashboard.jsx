@@ -5,6 +5,8 @@ import { fetchWrapper } from '../../shared/utils/fetchWrapper';
 import { LogOut, Plus, Image as ImageIcon, Activity, CheckCircle, Clock, Phone, MessageSquare, ChevronDown, ChevronUp, Sun, Moon } from 'lucide-react';
 import imageCompression from 'browser-image-compression';
 
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL ?? 'http://localhost:5000';
+
 const UserDashboard = () => {
   const { user, logoutAuth } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -243,7 +245,7 @@ const UserDashboard = () => {
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <a href={`http://localhost:5000${r.photoUrl}`} target="_blank" rel="noreferrer" className="text-secondary hover:text-secondary-dark hover:underline flex gap-1 items-center bg-secondary/10 px-3 py-1.5 rounded-lg transition-colors font-medium text-xs">
+                        <a href={`${SOCKET_URL}${r.photoUrl}`} target="_blank" rel="noreferrer" className="text-secondary hover:text-secondary-dark hover:underline flex gap-1 items-center bg-secondary/10 px-3 py-1.5 rounded-lg transition-colors font-medium text-xs">
                           <ImageIcon size={13}/> View Photo
                         </a>
                         {/* Toggle detail button */}
