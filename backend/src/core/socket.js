@@ -5,7 +5,7 @@ module.exports = {
     const { Server } = require('socket.io');
     io = new Server(httpServer, {
       cors: {
-        origin: '*', // For demo purposes, in prod restrict this
+        origin: process.env.CORS_ORIGIN || '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE']
       }
     });

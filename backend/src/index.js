@@ -16,7 +16,8 @@ const server = http.createServer(app);
 socketCore.init(server);
 
 // Middlewares
-app.use(cors());
+const corsOrigin = process.env.CORS_ORIGIN || '*';
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
