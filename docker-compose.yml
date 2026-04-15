@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: muhammadikhsan/lapor-backend:latest
     container_name: health_report_backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
@@ -17,15 +15,10 @@ services:
       - "${PORT}:${PORT}"
     restart: unless-stopped
     command: >
-      sh -c "npx prisma db push && node src/index.js"
+      sh -c "npx prisma generate && npx prisma db push && node src/index.js"
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
-        - VITE_SOCKET_URL=${VITE_SOCKET_URL}
+    image: muhammadikhsan/lapor-frontend:latest
     container_name: health_report_frontend
     ports:
       - "8080:80"
