@@ -1,0 +1,2 @@
+# This file ensures the uploads/ directory is tracked by Git,
+# while its contents (uploaded images) are ignored via .gitignore.

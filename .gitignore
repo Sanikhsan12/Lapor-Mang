@@ -1,0 +1,88 @@
+# =============================================
+#   LAPOR MANG — Root .gitignore
+# =============================================
+
+# ──────────────────────────────────────────
+# Dependencies
+# ──────────────────────────────────────────
+node_modules/
+**/node_modules/
+.npm
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+
+# ──────────────────────────────────────────
+# Environment Variables (SENSITIVE!)
+# ──────────────────────────────────────────
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# ──────────────────────────────────────────
+# Build Outputs
+# ──────────────────────────────────────────
+dist/
+build/
+**/dist/
+**/build/
+frontend/dist/
+
+# ──────────────────────────────────────────
+# Uploaded Files (user content)
+# ──────────────────────────────────────────
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ──────────────────────────────────────────
+# Prisma Generated Client
+# ──────────────────────────────────────────
+backend/node_modules/.prisma/
+backend/src/generated/
+
+# ──────────────────────────────────────────
+# Logs
+# ──────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+**/logs/
+
+# ──────────────────────────────────────────
+# OS & Editor Artifacts
+# ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/settings.json
+.vscode/*.code-workspace
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ──────────────────────────────────────────
+# Docker Volumes (if bind-mounted locally)
+# ──────────────────────────────────────────
+pgdata/
+
+# ──────────────────────────────────────────
+# Misc
+# ──────────────────────────────────────────
+.cache/
+.temp/
+.tmp/
+*.tgz
+*.zip
+
+# non public
+nonpublic/
