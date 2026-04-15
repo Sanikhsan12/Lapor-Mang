@@ -20,7 +20,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/lapor-backend:latest ./backend
           docker build \
-            --build-arg VITE_API_BASE_URL=http://${{ secrets.VM_IP }}:5000 \
+            --build-arg VITE_API_BASE_URL=http://${{ secrets.VM_IP }}:5000/api \
             --build-arg VITE_SOCKET_URL=http://${{ secrets.VM_IP }}:5000 \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/lapor-frontend:latest ./frontend
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/lapor-backend:latest
